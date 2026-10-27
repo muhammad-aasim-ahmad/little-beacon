@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Little Beacon</title>
+  <meta name="description" content="A 15-minute survival builder: turn a crashed ship into a shelter, mine an asteroid and build a distress beacon.">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app" id="app" hidden>
+    <header class="hud" aria-label="Outpost status">
+      <ul class="resources" id="resources"></ul>
+      <div class="needs">
+        <div class="need" id="need-hunger">
+          <span class="ico" data-icon="hunger" aria-hidden="true"></span>
+          <label for="m-hunger">Hunger</label>
+          <meter id="m-hunger" min="0" max="100" low="20" high="35" optimum="100"></meter>
+          <output id="v-hunger"></output>
+          <span class="flag" id="f-hunger"></span>
+        </div>
+        <div class="need" id="need-energy">
+          <span class="ico" data-icon="energy" aria-hidden="true"></span>
+          <label for="m-energy">Energy</label>
+          <meter id="m-energy" min="0" max="100" low="15" high="25" optimum="100"></meter>
+          <output id="v-energy"></output>
+          <span class="flag" id="f-energy"></span>
+        </div>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="stage" aria-label="Outpost">
+        <div class="canvas-wrap" id="canvas-wrap">
+          <canvas id="world" width="480" height="320" tabindex="0"
+            aria-label="Outpost map. Use arrow keys to move the cell selector and Enter to inspect or apply the active tool."
+            aria-describedby="selector-text"></canvas>
+          <div class="paused-badge" id="paused-badge" hidden>Paused</div>
+        </div>
+        <p class="sr-only" id="selector-text"></p>
+
+        <div class="action-line" aria-live="off">
+          <span class="ico" id="action-icon" data-icon="inspect" aria-hidden="true"></span>
+          <span id="action-text">Idle</span>
+          <span class="tool-text" id="tool-text"></span>
+        </div>
+
+        <div class="toolbar" role="toolbar" aria-label="Controls">
+          <button type="button" id="b-mine" aria-pressed="false"><span class="ico" data-icon="mine" aria-hidden="true"></span>Mine <kbd>M</kbd></button>
+          <button type="button" id="b-build" aria-pressed="false" aria-controls="palette"><span class="ico" data-icon="build" aria-hidden="true"></span>Build <kbd>B</kbd></button>
+          <button type="button" id="b-eat"><span class="ico" data-icon="eat" aria-hidden="true"></span>Eat <kbd>E</kbd></button>
+          <button type="button" id="b-rest"><span class="ico" data-icon="rest" aria-hidden="true"></span>Rest <kbd>R</kbd></button>
+          <span class="sep" aria-hidden="true"></span>
+          <button type="button" id="b-pause"><span class="ico" data-icon="pause" aria-hidden="true"></span><span id="pause-label">Pause</span> <kbd>Space</kbd></button>
+          <div class="speed" role="group" aria-label="Speed">
+            <button type="button" id="b-1x" aria-pressed="true">1x</button>
+            <button type="button" id="b-2x" aria-pressed="false"><span class="ico" data-icon="fast" aria-hidden="true"></span>2x</button>
+          </div>
+          <label class="check"><input type="checkbox" id="c-auto" checked> Auto care</label>
+          <span class="sep" aria-hidden="true"></span>
+          <button type="button" id="b-save"><span class="ico" data-icon="save" aria-hidden="true"></span>Save</button>
+          <button type="button" id="b-export">Export</button>
+          <button type="button" id="b-menu">Menu</button>
+        </div>
+
+        <p class="storage-warning" id="storage-warning" hidden>Browser storage is unavailable, so progress is kept in memory only. Use <strong>Export</strong> to keep a copy.</p>
+      </section>
+
+      <aside class="side">
+        <section class="panel palette" id="palette" hidden aria-labelledby="pal-title">
+          <h2 id="pal-title"><span class="ico" data-icon="build" aria-hidden="true"></span>Build</h2>
+          <p class="muted">Pick a room, then click a cell. Right click or Esc to stop.</p>
+          <ul class="cards" id="cards"></ul>
+        </section>
+
+        <section class="panel hint" id="hint" hidden aria-labelledby="hint-title">
+          <h2 id="hint-title">Tip</h2>
+          <p id="hint-text"></p>
+          <button type="button" id="hint-ok">Got it</button>
+        </section>
+
+        <section class="panel" aria-labelledby="goal-title">
+          <details id="goal-details" open>
+            <summary><h2 id="goal-title">Next step</h2> <span id="goal-next"></span></summary>
+            <ol class="chain" id="chain"></ol>
+          </details>
+        </section>
+
+        <section class="panel" aria-labelledby="insp-title">
+          <h2 id="insp-title">Inspector</h2>
+          <div id="inspector"><p class="muted">Click a room or rock block to inspect it.</p></div>
+        </section>
+
+        <section class="panel" aria-labelledby="jobs-title">
+          <h2 id="jobs-title"><span class="ico" data-icon="jobs" aria-hidden="true"></span>Jobs</h2>
+          <ol class="jobs" id="jobs"></ol>
+          <p class="muted" id="jobs-empty">No queued work.</p>
+          <div class="stations" id="stations"></div>
+        </section>
+      </aside>
+    </main>
+  </div>
+
+  <div class="loading" id="loading">
+    <p id="loading-text">Loading Little Beacon…</p>
+    <button type="button" id="retry" hidden>Retry</button>
+  </div>
+
+  <div class="sr-only" aria-live="polite" id="live"></div>
+  <div class="toasts" id="toasts" aria-hidden="true"></div>
+
+  <dialog id="d-title" aria-labelledby="t-title">
+    <h1 id="t-title">Little Beacon</h1>
+    <div id="premise" class="premise">
+      <p>Your ship crashed on a fractured asteroid. It will never fly again.</p>
+      <p>The ship radio cannot reach the distant relay, but an echo crystal deep in the rock could power a stronger signal.</p>
+      <p>Mine, build and stay fed and rested until someone hears your call.</p>
+    </div>
+    <p class="notice" id="title-notice" hidden></p>
+    <div class="menu">
+      <button type="button" id="t-new">New Run</button>
+      <button type="button" id="t-continue">Continue</button>
+      <button type="button" id="t-import">Import Save</button>
+      <button type="button" id="t-settings">Settings</button>
+    </div>
+    <input type="file" id="import-file" accept="application/json,.json" hidden>
+  </dialog>
+
+  <dialog id="d-pause" aria-labelledby="p-title">
+    <h2 id="p-title">Paused</h2>
+    <div class="menu">
+      <button type="button" id="p-resume">Resume</button>
+      <button type="button" id="p-save">Save</button>
+      <button type="button" id="p-export">Export Save</button>
+      <button type="button" id="p-import">Import Save</button>
+      <button type="button" id="p-settings">Settings</button>
+      <button type="button" id="p-title-btn">Title screen</button>
+    </div>
+  </dialog>
+
+  <dialog id="d-confirm" aria-labelledby="c-title">
+    <h2 id="c-title"></h2>
+    <div id="c-body"></div>
+    <div class="menu row">
+      <button type="button" id="c-yes">Confirm</button>
+      <button type="button" id="c-no">Cancel</button>
+    </div>
+  </dialog>
+
+  <dialog id="d-settings" aria-labelledby="s-title">
+    <h2 id="s-title">Settings</h2>
+    <label class="check"><input type="checkbox" id="s-motion"> Reduced motion</label>
+    <p class="muted">Progress is saved in this browser only. Clearing site data removes it, so use Export Save to keep a copy.</p>
+    <div class="menu row"><button type="button" id="s-close">Close</button></div>
+  </dialog>
+
+  <dialog id="d-results" aria-labelledby="r-title">
+    <h2 id="r-title">Rescued!</h2>
+    <p>The rescue ship heard the beacon. The astronaut is on board and heading home.</p>
+    <dl class="results" id="r-stats"></dl>
+    <div class="menu row">
+      <button type="button" id="r-review">Review Outpost</button>
+      <button type="button" id="r-new">New Run</button>
+    </div>
+  </dialog>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
