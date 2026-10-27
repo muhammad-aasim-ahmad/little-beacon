@@ -1,0 +1,37 @@
+{
+  "balanceVersion": 2,
+  "start": { "scrap": 18, "regolith": 0, "carbide": 0, "ration": 2, "hunger": 85, "energy": 100 },
+  "depths": [
+    { "work": 55,  "scrap": 22, "regolith": 12, "needsDrill": false },
+    { "work": 95,  "scrap": 16, "regolith": 18, "needsDrill": true },
+    { "work": 125, "scrap": 16, "regolith": 24, "needsDrill": true },
+    { "work": 165, "scrap": 12, "regolith": 24, "needsDrill": true }
+  ],
+  "geodeCell": [1, 3],
+  "shelterSlot": [1, 0],
+  "buildings": {
+    "workshop":    { "name": "Workshop",    "cost": { "scrap": 10 }, "work": 25, "load": 1, "supply": 0, "max": 1, "surface": true, "cave": true,  "sky": false, "unlock": "start",    "info": "Bench for the drill upgrade." },
+    "sifter":      { "name": "Sifter",      "cost": { "scrap": 12 }, "work": 25, "load": 1, "supply": 0, "max": 1, "surface": true, "cave": true,  "sky": false, "unlock": "workshop", "info": "Separates carbide grit and the echo crystal." },
+    "solar":       { "name": "Solar",       "cost": { "scrap": 10 }, "work": 20, "load": 0, "supply": 4, "max": 2, "surface": true, "cave": false, "sky": true,  "unlock": "workshop", "info": "+4 power. Needs open sky." },
+    "greenhouse":  { "name": "Greenhouse",  "cost": { "scrap": 10, "carbide": 2 }, "work": 25, "load": 1, "supply": 0, "max": 1, "surface": true, "cave": true, "sky": false, "unlock": "sifter", "info": "Grows 1 ration every 150 powered s (cap 4)." },
+    "bunk":        { "name": "Bunk",        "cost": { "scrap": 8 },  "work": 20, "load": 0, "supply": 0, "max": 1, "surface": true, "cave": true,  "sky": false, "unlock": "workshop", "info": "Rest 25% faster than the shelter bed." },
+    "beacon":      { "name": "Distress beacon", "cost": { "scrap": 18, "carbide": 2, "crystal": 1 }, "work": 35, "load": 3, "supply": 0, "max": 1, "surface": true, "cave": false, "sky": true, "unlock": "crystal", "info": "Broadcasts the distress call. Needs open sky." },
+    "storage":     { "name": "Storage",     "cost": { "scrap": 6 },  "work": 20, "load": 0, "supply": 0, "max": 1, "surface": true, "cave": true,  "sky": false, "unlock": "drill",    "info": "Cosmetic crates." },
+    "observatory": { "name": "Observatory", "cost": { "scrap": 6 },  "work": 20, "load": 0, "supply": 0, "max": 1, "surface": true, "cave": false, "sky": false, "unlock": "drill",    "info": "Cosmetic window. Surface only." }
+  },
+  "buildOrder": ["workshop", "sifter", "solar", "greenhouse", "bunk", "beacon", "storage", "observatory"],
+  "shelterSupply": 2,
+  "shedOrder": ["beacon", "greenhouse", "sifter", "workshop"],
+  "recipes": {
+    "carbide": { "name": "Carbide batch",    "in": { "regolith": 6 }, "out": { "carbide": 2 }, "time": 30 },
+    "echo":    { "name": "Separate echo crystal", "in": { "geode": 1, "carbide": 2 }, "out": { "crystal": 1 }, "time": 60 }
+  },
+  "drill": { "cost": { "scrap": 6, "carbide": 2 }, "work": 35 },
+  "greenhouse": { "interval": 150, "cap": 4 },
+  "hunger": { "awake": 0.14, "asleep": 0.07, "autoAt": 35, "lowAt": 20, "meal": { "time": 8, "gain": 50 }, "paste": { "time": 25, "gain": 40, "cooldown": 120 } },
+  "energy": { "work": 0.18, "travel": 0.10, "idle": 0.05, "autoAt": 25, "lowAt": 15, "restTo": 85, "shelterRate": 1.5, "bunkRate": 1.875 },
+  "lowRate": 0.65,
+  "moveSpeed": 32,
+  "broadcast": 90,
+  "rescue": 10
+}

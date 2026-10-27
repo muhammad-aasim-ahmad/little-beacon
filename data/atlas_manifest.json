@@ -1,0 +1,830 @@
+{
+ "version": 2,
+ "palette": {
+  "navy": "#101b30",
+  "outline": "#162a3a",
+  "teal": "#287083",
+  "teal_light": "#4996a0",
+  "amber": "#e9a343",
+  "cream": "#f4edc9",
+  "rock_light": "#858697",
+  "rock_dark": "#555d73",
+  "metal": "#b9c3ca",
+  "orange": "#d97635",
+  "brown": "#835839",
+  "green": "#6aab61",
+  "cyan": "#62c7d8"
+ },
+ "atlases": {
+  "rooms": {
+   "image": "assets/rooms.png",
+   "frame": [
+    32,
+    32
+   ],
+   "frames": {
+    "shelter": [
+     0,
+     0,
+     32,
+     32
+    ],
+    "workshop": [
+     32,
+     0,
+     32,
+     32
+    ],
+    "sifter": [
+     64,
+     0,
+     32,
+     32
+    ],
+    "solar": [
+     96,
+     0,
+     32,
+     32
+    ],
+    "greenhouse": [
+     0,
+     32,
+     32,
+     32
+    ],
+    "bunk": [
+     32,
+     32,
+     32,
+     32
+    ],
+    "beacon": [
+     64,
+     32,
+     32,
+     32
+    ],
+    "storage": [
+     96,
+     32,
+     32,
+     32
+    ],
+    "observatory": [
+     0,
+     64,
+     32,
+     32
+    ],
+    "empty": [
+     32,
+     64,
+     32,
+     32
+    ],
+    "cave_workshop": [
+     64,
+     64,
+     32,
+     32
+    ],
+    "cave_sifter": [
+     96,
+     64,
+     32,
+     32
+    ],
+    "cave_greenhouse": [
+     0,
+     96,
+     32,
+     32
+    ],
+    "cave_bunk": [
+     32,
+     96,
+     32,
+     32
+    ],
+    "cave_storage": [
+     64,
+     96,
+     32,
+     32
+    ],
+    "cave_empty": [
+     96,
+     96,
+     32,
+     32
+    ]
+   }
+  },
+  "terrain": {
+   "image": "assets/terrain.png",
+   "frame": [
+    16,
+    16
+   ],
+   "frames": {
+    "rock_d0": [
+     0,
+     0,
+     16,
+     16
+    ],
+    "rock_d1": [
+     16,
+     0,
+     16,
+     16
+    ],
+    "rock_d2": [
+     32,
+     0,
+     16,
+     16
+    ],
+    "rock_d3": [
+     48,
+     0,
+     16,
+     16
+    ],
+    "ore_d0": [
+     64,
+     0,
+     16,
+     16
+    ],
+    "ore_d1": [
+     80,
+     0,
+     16,
+     16
+    ],
+    "ore_d2": [
+     96,
+     0,
+     16,
+     16
+    ],
+    "ore_d3": [
+     112,
+     0,
+     16,
+     16
+    ],
+    "geode_rock": [
+     0,
+     16,
+     16,
+     16
+    ],
+    "excavated": [
+     16,
+     16,
+     16,
+     16
+    ],
+    "ladder": [
+     32,
+     16,
+     16,
+     16
+    ],
+    "ledge": [
+     48,
+     16,
+     16,
+     16
+    ],
+    "crack_a": [
+     64,
+     16,
+     16,
+     16
+    ],
+    "crack_b": [
+     80,
+     16,
+     16,
+     16
+    ],
+    "sel_cream": [
+     96,
+     16,
+     16,
+     16
+    ],
+    "sel_ok": [
+     112,
+     16,
+     16,
+     16
+    ],
+    "sel_reject": [
+     0,
+     32,
+     16,
+     16
+    ],
+    "sel_queued": [
+     16,
+     32,
+     16,
+     16
+    ],
+    "fill_dark": [
+     32,
+     32,
+     16,
+     16
+    ],
+    "fill_teal": [
+     48,
+     32,
+     16,
+     16
+    ],
+    "no_power": [
+     64,
+     32,
+     16,
+     16
+    ],
+    "sel_paused": [
+     80,
+     32,
+     16,
+     16
+    ],
+    "debris": [
+     96,
+     32,
+     16,
+     16
+    ],
+    "dot": [
+     112,
+     32,
+     16,
+     16
+    ]
+   }
+  },
+  "astronaut": {
+   "image": "assets/astronaut.png",
+   "frame": [
+    16,
+    16
+   ],
+   "frames": {
+    "idle_0": [
+     0,
+     0,
+     16,
+     16
+    ],
+    "idle_1": [
+     16,
+     0,
+     16,
+     16
+    ],
+    "walk_0": [
+     32,
+     0,
+     16,
+     16
+    ],
+    "walk_1": [
+     48,
+     0,
+     16,
+     16
+    ],
+    "walk_2": [
+     64,
+     0,
+     16,
+     16
+    ],
+    "walk_3": [
+     80,
+     0,
+     16,
+     16
+    ],
+    "mine_0": [
+     96,
+     0,
+     16,
+     16
+    ],
+    "mine_1": [
+     112,
+     0,
+     16,
+     16
+    ],
+    "build_0": [
+     0,
+     16,
+     16,
+     16
+    ],
+    "build_1": [
+     16,
+     16,
+     16,
+     16
+    ],
+    "climb_0": [
+     32,
+     16,
+     16,
+     16
+    ],
+    "climb_1": [
+     48,
+     16,
+     16,
+     16
+    ],
+    "eat_0": [
+     64,
+     16,
+     16,
+     16
+    ],
+    "eat_1": [
+     80,
+     16,
+     16,
+     16
+    ],
+    "sleep_0": [
+     96,
+     16,
+     16,
+     16
+    ],
+    "sleep_1": [
+     112,
+     16,
+     16,
+     16
+    ],
+    "celebrate_0": [
+     0,
+     32,
+     16,
+     16
+    ],
+    "celebrate_1": [
+     16,
+     32,
+     16,
+     16
+    ]
+   },
+   "animations": {
+    "idle": {
+     "start": 0,
+     "count": 2,
+     "fps": 2,
+     "loop": true
+    },
+    "walk": {
+     "start": 2,
+     "count": 4,
+     "fps": 6,
+     "loop": true
+    },
+    "mine": {
+     "start": 6,
+     "count": 2,
+     "fps": 4,
+     "loop": true
+    },
+    "build": {
+     "start": 8,
+     "count": 2,
+     "fps": 4,
+     "loop": true
+    },
+    "climb": {
+     "start": 10,
+     "count": 2,
+     "fps": 4,
+     "loop": true
+    },
+    "eat": {
+     "start": 12,
+     "count": 2,
+     "fps": 3,
+     "loop": true
+    },
+    "sleep": {
+     "start": 14,
+     "count": 2,
+     "fps": 1,
+     "loop": true
+    },
+    "celebrate": {
+     "start": 16,
+     "count": 2,
+     "fps": 3,
+     "loop": false
+    }
+   },
+   "pivot": [
+    8,
+    15
+   ]
+  },
+  "icons": {
+   "image": "assets/icons.png",
+   "frame": [
+    16,
+    16
+   ],
+   "frames": {
+    "scrap": [
+     0,
+     0,
+     16,
+     16
+    ],
+    "regolith": [
+     16,
+     0,
+     16,
+     16
+    ],
+    "carbide": [
+     32,
+     0,
+     16,
+     16
+    ],
+    "geode": [
+     48,
+     0,
+     16,
+     16
+    ],
+    "crystal": [
+     64,
+     0,
+     16,
+     16
+    ],
+    "ration": [
+     80,
+     0,
+     16,
+     16
+    ],
+    "hunger": [
+     96,
+     0,
+     16,
+     16
+    ],
+    "energy": [
+     112,
+     0,
+     16,
+     16
+    ],
+    "power": [
+     0,
+     16,
+     16,
+     16
+    ],
+    "mine": [
+     16,
+     16,
+     16,
+     16
+    ],
+    "build": [
+     32,
+     16,
+     16,
+     16
+    ],
+    "pause": [
+     48,
+     16,
+     16,
+     16
+    ],
+    "fast": [
+     64,
+     16,
+     16,
+     16
+    ],
+    "ok": [
+     80,
+     16,
+     16,
+     16
+    ],
+    "invalid": [
+     96,
+     16,
+     16,
+     16
+    ],
+    "sound": [
+     112,
+     16,
+     16,
+     16
+    ],
+    "save": [
+     0,
+     32,
+     16,
+     16
+    ],
+    "eat": [
+     16,
+     32,
+     16,
+     16
+    ],
+    "rest": [
+     32,
+     32,
+     16,
+     16
+    ],
+    "beacon": [
+     48,
+     32,
+     16,
+     16
+    ],
+    "inspect": [
+     64,
+     32,
+     16,
+     16
+    ],
+    "warning": [
+     80,
+     32,
+     16,
+     16
+    ],
+    "move_up": [
+     96,
+     32,
+     16,
+     16
+    ],
+    "jobs": [
+     112,
+     32,
+     16,
+     16
+    ]
+   }
+  },
+  "machines": {
+   "image": "assets/machines.png",
+   "frame": [
+    16,
+    16
+   ],
+   "frames": {
+    "sifter_0": [
+     0,
+     0,
+     16,
+     16
+    ],
+    "sifter_1": [
+     16,
+     0,
+     16,
+     16
+    ],
+    "plant_0": [
+     32,
+     0,
+     16,
+     16
+    ],
+    "plant_1": [
+     48,
+     0,
+     16,
+     16
+    ],
+    "drill_0": [
+     64,
+     0,
+     16,
+     16
+    ],
+    "drill_1": [
+     80,
+     0,
+     16,
+     16
+    ],
+    "beacon_0": [
+     96,
+     0,
+     16,
+     16
+    ],
+    "beacon_1": [
+     112,
+     0,
+     16,
+     16
+    ]
+   },
+   "animations": {
+    "sifter": {
+     "start": 0,
+     "count": 2,
+     "fps": 4,
+     "loop": true
+    },
+    "plant": {
+     "start": 2,
+     "count": 2,
+     "fps": 2,
+     "loop": true
+    },
+    "drill": {
+     "start": 4,
+     "count": 2,
+     "fps": 4,
+     "loop": true
+    },
+    "beacon": {
+     "start": 6,
+     "count": 2,
+     "fps": 2,
+     "loop": true
+    }
+   }
+  },
+  "effects": {
+   "image": "assets/effects.png",
+   "frame": [
+    16,
+    16
+   ],
+   "frames": {
+    "spark_0": [
+     0,
+     0,
+     16,
+     16
+    ],
+    "spark_1": [
+     16,
+     0,
+     16,
+     16
+    ],
+    "dust_0": [
+     32,
+     0,
+     16,
+     16
+    ],
+    "dust_1": [
+     48,
+     0,
+     16,
+     16
+    ],
+    "signal_0": [
+     64,
+     0,
+     16,
+     16
+    ],
+    "signal_1": [
+     80,
+     0,
+     16,
+     16
+    ],
+    "thruster_0": [
+     96,
+     0,
+     16,
+     16
+    ],
+    "thruster_1": [
+     112,
+     0,
+     16,
+     16
+    ],
+    "food_0": [
+     0,
+     16,
+     16,
+     16
+    ],
+    "food_1": [
+     16,
+     16,
+     16,
+     16
+    ],
+    "zzz_0": [
+     32,
+     16,
+     16,
+     16
+    ],
+    "zzz_1": [
+     48,
+     16,
+     16,
+     16
+    ]
+   },
+   "animations": {
+    "spark": {
+     "start": 0,
+     "count": 2,
+     "fps": 8,
+     "loop": true
+    },
+    "dust": {
+     "start": 2,
+     "count": 2,
+     "fps": 6,
+     "loop": true
+    },
+    "signal": {
+     "start": 4,
+     "count": 2,
+     "fps": 3,
+     "loop": true
+    },
+    "thruster": {
+     "start": 6,
+     "count": 2,
+     "fps": 8,
+     "loop": true
+    },
+    "food": {
+     "start": 8,
+     "count": 2,
+     "fps": 2,
+     "loop": true
+    },
+    "zzz": {
+     "start": 10,
+     "count": 2,
+     "fps": 1,
+     "loop": true
+    }
+   }
+  },
+  "ship": {
+   "image": "assets/ship.png",
+   "frame": [
+    32,
+    16
+   ],
+   "frames": {
+    "ship_flying": [
+     0,
+     0,
+     32,
+     16
+    ],
+    "ship_landed": [
+     32,
+     0,
+     32,
+     16
+    ]
+   },
+   "pivot": [
+    16,
+    15
+   ]
+  }
+ },
+ "background": "assets/background.png"
+}
